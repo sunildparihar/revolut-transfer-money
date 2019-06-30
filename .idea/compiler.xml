@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ft-connection-management" />
+        <module name="ft-core-services" />
+        <module name="ft-engine" />
+        <module name="ft-persistence-services" />
+        <module name="ft-rest-services" />
+        <module name="ft-sdk-bundle" />
+        <module name="ft-service-gateway" />
+        <module name="ft-transaction-management" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ft-business-services" target="1.8" />
+      <module name="ft-connection-management" target="1.8" />
+      <module name="ft-core-services" target="1.8" />
+      <module name="ft-engine" target="1.8" />
+      <module name="ft-persistence-services" target="1.8" />
+      <module name="ft-rest-services" target="1.8" />
+      <module name="ft-sdk-bundle" target="1.8" />
+      <module name="ft-service-gateway" target="1.8" />
+      <module name="ft-transaction-management" target="1.8" />
+      <module name="revolut-transfer-money" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

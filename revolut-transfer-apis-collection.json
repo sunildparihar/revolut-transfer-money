@@ -1,0 +1,138 @@
+{
+	"info": {
+		"name": "Revolut-Rest",
+		"_postman_id": "677476d4-3864-7f51-7d1f-7cd602db74d4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Withdraw",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"transactionAmount\" : \"10\",\n\t\"accountId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7777/account/withdraw",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"account",
+						"withdraw"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Account-By-Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:7777/account/1",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"account",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List-All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:7777/account/list",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"account",
+						"list"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"transactionAmount\" : \"10\",\n\t\"accountId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7777/account/deposit",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"account",
+						"deposit"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer-Funds",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"transferAmount\" : \"30\",\n\t\"sourceAccountId\" : \"2\",\n\t\"destinationAccountId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7777/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"transfer"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

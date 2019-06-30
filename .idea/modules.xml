@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-business-services.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-business-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-connection-management/ft-connection-management.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-connection-management/ft-connection-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-core-services/ft-core-services.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-core-services/ft-core-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-engine/ft-engine.iml" filepath="$PROJECT_DIR$/ft-engine/ft-engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-persistence-services/ft-persistence-services.iml" filepath="$PROJECT_DIR$/ft-persistence-services/ft-persistence-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-rest-services/ft-rest-services.iml" filepath="$PROJECT_DIR$/ft-rest-services/ft-rest-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-sdk-bundle/ft-sdk-bundle.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-sdk-bundle/ft-sdk-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-service-gateway/ft-service-gateway.iml" filepath="$PROJECT_DIR$/ft-service-gateway/ft-service-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-transaction-management/ft-transaction-management.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-transaction-management/ft-transaction-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/revolut-transfer-money.iml" filepath="$PROJECT_DIR$/revolut-transfer-money.iml" />
+    </modules>
+  </component>
+</project>

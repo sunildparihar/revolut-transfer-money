@@ -1,0 +1,1 @@
+java -jar ft-engine/target/ftengine.jar
