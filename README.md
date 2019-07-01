@@ -34,33 +34,33 @@ Rest Client ==> Rest Service ==> Service Gateway ==> Cose Business Service ==> D
 ### Brief Description about each layer
 
 Data Access layer
-```
+
 Written in plain JDBC. Refer module ft-persistence-services. This layer can be changed to use any ORM framework or to change 
 
 DB vendor without affecting any other layer.
-```
+
 
 Core Business Services
-```
+
 This contains 
-1. <B>SDK Bundle</B> with availble service interfaces. Services can be annotated with standard javax @Transactional annotation to include transactions with the specified propagation level. Refer module ft-sdk-bundle.
-2. <B>Core business implementation</B> for the service interfaces. Refer ft-core-services.
-3. <B>A Service Locator</B> module that locates service interface implementation class to be invoked by service gateway. The purpose of this locator interface is to hide any core implementation level classes to outside layer i.e. service gateway, rest services. This locator has been written in way that adding a new service interface doesn't require any changes here untill and unless we choose to write implementation class not ending with <ServiceInterfaceName>Impl.java or not in the base core impl package i.e. "com.revolut.core.fundstransfer.impl". In case we want to write a Implementation class with different naming convention or outside the base package, we can write a custom Service Locator implementing ServiceLocator.java interface. Refer {AccountServiceLocator.java} However this service locator can be modified to locate service implementation in a more elegant way e.g. using annotation based scanning same as Spring's component scan.
-4. <B>Transaction Management</B> Module : A module to handle transaction management based on the standard transaction propagation levels. It supports starting and ending transactions with also support for nested transaction. This is thread safe i.e. multiple threads can start or end transactions in parallel without affecting each other. refer module ft-transaction-management
-5. <B>Connection Manager</B> Module: A module to manage database connections i.e. pooling of connections. As of now connection pooling is not implementated in this project due to time constraint but a clear support is there by adding this module. Adding a connection pool library will only require changes in this module without affecting any other layer.
-```
+1.  SDK Bundle with available service interfaces. Services can be annotated with standard javax @Transactional annotation to include transactions with the specified propagation level. Refer module ft-sdk-bundle.
+2. Core business implementation for the service interfaces. Refer ft-core-services.
+3. A Service Locator module that locates service interface implementation class to be invoked by service gateway. The purpose of this locator interface is to hide any core implementation level classes to outside layer i.e. service gateway, rest services. This locator has been written in way that adding a new service interface doesn't require any changes here untill and unless we choose to write implementation class not ending with <ServiceInterfaceName>Impl.java or not in the base core impl package i.e. "com.revolut.core.fundstransfer.impl". In case we want to write a Implementation class with different naming convention or outside the base package, we can write a custom Service Locator implementing ServiceLocator.java interface. Refer {AccountServiceLocator.java} However this service locator can be modified to locate service implementation in a more elegant way e.g. using annotation based scanning same as Spring's component scan.
+4. Transaction Management Module : A module to handle transaction management based on the standard transaction propagation levels. It supports starting and ending transactions with also support for nested transaction. This is thread safe i.e. multiple threads can start or end transactions in parallel without affecting each other. refer module ft-transaction-management
+5. Connection Manager Module: A module to manage database connections i.e. pooling of connections. As of now connection pooling is not implementated in this project due to time constraint but a clear support is there by adding this module. Adding a connection pool library will only require changes in this module without affecting any other layer.
+
 Service Gateway
-````
+
 A Gateway to invoke core business services from any application interface e.g. Rest Interface, SOAP Interface or from any presentation layer application. The purpose of this service gateway to perform common checks and tasks before and after invoking core business services, similar to AOP. In this project i am only putting transaction management in this gateway but this gateway is open to be enhanced for logging, security checks etc.. This calls service locator to get the actual service implementation. Refer module ft-service-gateway
-````
+
 
 Rest Services
-```
+
 An application layer for invoking core business servies through service gateway. This is implemented using JAX-RS specs. This calls service gateway with following inputs:
 1. Class type of the Service Interface to be invoked.
 2. Method name of the service interface to be invoked.
 3. The actual parameters to be passed to invoke the service method. The method params need to be passed in the same order as declared in the methods declaration of the service contract(interface). So that service can invoke the correct method.
 
 Rest interface only have visibility of sdk bundle (service interface and java models) and service gateway. This reduces coupling between app layer and business layer.
-```
+
 
