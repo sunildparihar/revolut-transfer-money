@@ -14,7 +14,19 @@ A Java based Funds Transfer Engine with an in-memory DB and remote interface exp
 * Withdraw Money
 * Deposit Money
 * Transfer Funds
+
 #### The In-Memory H2 DB is prepopulated with 5 accounts. For simplicity APIs for create and delete account feature have not been provided.
+
+## Data Model
+
+There is only one table Bank_Account designed in order to stick to basic requirement i.e. transfer money without any user authentication. Hence, i have prepopulated this table with 5 accounts as below
+```
+INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('1','093801051','account-1',1000.00);
+INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('2','093801052','account-2',1500.00);
+INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('3','093801053','account-3',1300.00);
+INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('4','093801054','account-4',7000.00);
+INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('5','093801054','account-5',8000.00);
+```
 
 ## Architechture of Application
 This is a multi layered application with clear separation between individual layers. Following are the layers
