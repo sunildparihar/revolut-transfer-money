@@ -35,10 +35,7 @@ Rest Client ==> Rest Service ==> Service Gateway ==> Cose Business Service ==> D
 
 #### Data Access layer
 
-Written in plain JDBC. Refer module ft-persistence-services. This layer can be changed to use any ORM framework or to change 
-
-DB vendor without affecting any other layer.
-
+Written in plain JDBC. Refer module ft-persistence-services. This layer can be changed to use any ORM framework or to change DB vendor without affecting any other layer.
 
 #### Core Business Services
 
