@@ -50,7 +50,7 @@ Concurrency control has been handled at lowest level i.e. at DB layer using tabl
 
 #### Data Access layer
 
-Written in plain JDBC. Refer module ft-persistence-services. This layer can be changed to use any ORM framework or to change DB vendor without affecting any other layer.
+Written in plain JDBC. Refer module ft-persistence-services. This layer can be changed to use any ORM framework or to change DB vendor without affecting any other layer. This layer doesn't handle transaction i.e. commit or rollback. It has been handled at business layer itself based on javax.transaction specs
 
 #### Core Business Services
 
@@ -82,7 +82,7 @@ Rest interface only have visibility of sdk bundle (service interface and java mo
 mvn clean install -DskipTests
 ```
 ## command to start funds transfer engine
-A separate module called ft-engine has been written to start a standalone restful funds transfer web server on port 7777.
+A separate module called ft-engine has been written to start a standalone restful funds transfer web server on port 7777. From porject root diredtory execute below
 ```
 sh startFTengine.sh (Linux/MAC) or startFTengine.bat (Windows)
 ```
