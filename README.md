@@ -31,6 +31,9 @@ The application flow goes as below:
 
 Rest Client ==> Rest Service ==> Service Gateway ==> Cose Business Service ==> Data Access Layer ==> DB
 
+### Concurrency Control for supporting multiple systems and services invoking our application
+Concurrency control has been handled at lowest level i.e. at DB layer using table row locks. I could have done at persistance layer or at business layer using java concurrent APIs but ideal place will be at DB layer only keeping in mind a real time scenario of application clustering.
+
 ### Brief Description about each layer
 
 #### Data Access layer
@@ -85,9 +88,9 @@ There are test cases cases written testing concurrency with 1000 threads.
 Download revolut-transfer-apis-collection.json from project root directory and import into postman to test the application from postman.
 
 
-## Basic API validation
+## Basic API validations
 * 'Get Account By Id' : Account existance
 * Deposit Money : Account existance and deposit amount validation
-* Withdraw Money : Account existance, deposit amount validation and balance check
+* Withdraw Money : Account existance, withdraw amount validation and balance check
 * Transfer Money : Source & Destination Account existance, transfer amount validation, source account balance check and credit back to source account in case of deposit failure to destination account.
 
