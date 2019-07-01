@@ -82,15 +82,12 @@ There are test cases cases written testing concurrency with 1000 threads.
 ```
 
 ## Postman Collection for Rest APIs
-```
-download revolut-transfer-apis-collection.json from project root directory and import into postman to test the application from postman.
-```
+Download revolut-transfer-apis-collection.json from project root directory and import into postman to test the application from postman.
 
-A transfer is successfully executed if:
-* The source and destination accounts exists
-* There is a sufficient balance on the source account
-* The currency of the transfer, of the source and destination accounts are identical
-* The transfer status is not FAILED or EXECUTED
 
-If one or more of these conditions are not fulfilled, the transfer status is set to FAILED.
+## Basic API validation
+* 'Get Account By Id' : Account existance
+* Deposit Money : Account existance and deposit amount validation
+* Withdraw Money : Account existance, deposit amount validation and balance check
+* Transfer Money : Source & Destination Account existance, transfer amount validation, source account balance check and credit back to source account in case of deposit failure to destination account.
 
