@@ -81,6 +81,11 @@ Test Cases have been written for AccountService and FundsTransferService.
 There are test cases cases written testing concurrency with 1000 threads.
 ```
 
+## Postman Collection for Rest APIs
+```
+download revolut-transfer-apis-collection.json from project root directory and import into postman to test the application from postman.
+```
+
 A transfer is successfully executed if:
 * The source and destination accounts exists
 * There is a sufficient balance on the source account
