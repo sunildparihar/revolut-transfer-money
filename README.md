@@ -88,7 +88,7 @@ sh startFTengine.sh (Linux/MAC) or startFTengine.bat (Windows)
 ```
 
 ## command to run tests
-All the integration test cases have been written inside ft-engine module. So go inside ft-engine directory and run below command
+All the integration test cases have been written inside ft-engine module. From project root directory, run below
 ```
 mvn clean install
 
