@@ -61,3 +61,31 @@ An application layer for invoking core business servies through service gateway.
 Rest interface only have visibility of sdk bundle (service interface and java models) and service gateway. This reduces coupling between app layer and business layer.
 
 
+
+## maven command to build the application
+```
+mvn clean install -DskipTests
+```
+## command to start funds transfer engine
+A separate module called ft-engine has been written to start a standalone restful funds transfer web server on port 7777.
+```
+sh startFTengine.sh (Linux/MAC) or startFTengine.bat (Windows)
+```
+
+## command to run tests
+All the integration test cases have been written inside ft-engine module. So go inside ft-engine directory and run below command
+```
+mvn clean install
+
+Test Cases have been written for AccountService and FundsTransferService.
+There are test cases cases written testing concurrency with 1000 threads.
+```
+
+A transfer is successfully executed if:
+* The source and destination accounts exists
+* There is a sufficient balance on the source account
+* The currency of the transfer, of the source and destination accounts are identical
+* The transfer status is not FAILED or EXECUTED
+
+If one or more of these conditions are not fulfilled, the transfer status is set to FAILED.
+
