@@ -16,6 +16,7 @@
     <orderEntry type="module" module-name="ft-connection-management" />
     <orderEntry type="module" module-name="ft-persistence-services" />
     <orderEntry type="module" module-name="ft-sdk-bundle" />
+    <orderEntry type="module" module-name="ft-services-locator" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.0" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.192" level="project" />

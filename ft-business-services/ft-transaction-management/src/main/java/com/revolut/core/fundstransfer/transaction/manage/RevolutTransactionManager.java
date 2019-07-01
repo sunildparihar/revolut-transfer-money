@@ -28,7 +28,7 @@ public class RevolutTransactionManager {
 
     /**
      * Starts a new Transaction if
-     * If Transaction Propagation is REQUIRES_NEW or
+     * If Transaction Propagation is REQUIRES_NEW OR
      * If Transaction Propagation is REQUIRED and there is no parent transaction found.
      *
      * As of now only REQUIRED & REQUIRES_NEW are supported.

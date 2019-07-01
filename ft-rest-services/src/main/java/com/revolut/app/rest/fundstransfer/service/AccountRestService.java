@@ -29,7 +29,7 @@ public class AccountRestService {
     @GET
     @Path("/list")
     public List<Account> getAllAccounts() throws ServiceException {
-        return (List) servicesGateway.passThrough(AccountService.class, "getAllAccounts");
+        return (List) servicesGateway.pass(AccountService.class, "getAllAccounts");
     }
 
     @GET
@@ -37,15 +37,15 @@ public class AccountRestService {
     public Account getAccount(@PathParam("accountId") long accountId) throws ServiceException {
 
         //calling below for ServiceGateway testing purpose, should be ignored
-        AccountMapper.convertFromVO((AccountVO) servicesGateway.passThrough(AccountService.class, "getAccount", accountId, true));
+        AccountMapper.convertFromVO((AccountVO) servicesGateway.pass(AccountService.class, "getAccount", accountId, true));
 
-        return AccountMapper.convertFromVO((AccountVO) servicesGateway.passThrough(AccountService.class, "getAccount", accountId));
+        return AccountMapper.convertFromVO((AccountVO) servicesGateway.pass(AccountService.class, "getAccount", accountId));
     }
 
     @POST
     @Path("/withdraw")
     public Response withdrawFromAccount(TransactionRequest transactionRequest) throws ServiceException {
-        servicesGateway.passThrough(
+        servicesGateway.pass(
                 AccountService.class, "withdrawFromAccount", transactionRequest.getAccountId(), transactionRequest.getTransactionAmount());
         return Response.status(Response.Status.OK).build();
     }
@@ -53,7 +53,7 @@ public class AccountRestService {
     @POST
     @Path("/deposit")
     public Response depositToAccount(TransactionRequest transactionRequest) throws ServiceException {
-        servicesGateway.passThrough(
+        servicesGateway.pass(
                 AccountService.class, "depositToAccount", transactionRequest.getAccountId(), transactionRequest.getTransactionAmount());
         return Response.status(Response.Status.OK).build();
     }

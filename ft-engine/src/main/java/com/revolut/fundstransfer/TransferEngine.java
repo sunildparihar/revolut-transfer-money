@@ -13,6 +13,9 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A standalone funds transfer engine with in memory H2 DB and communication interface exposed as Rest Services
+ */
 public class TransferEngine {
 
 	private static Logger log = Logger.getLogger(TransferEngine.class.getName());

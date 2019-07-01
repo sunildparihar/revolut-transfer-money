@@ -23,7 +23,7 @@ public class FundsTransferRestService {
 
 	@POST
 	public Response transferFunds(TransferRequest transferRequest) throws ServiceException {
-        servicesGateway.passThrough(FundsTransferService.class, "transferFunds", TransferRequestMapper.convertIntoVO(transferRequest));
+        servicesGateway.pass(FundsTransferService.class, "transferFunds", TransferRequestMapper.convertIntoVO(transferRequest));
         return Response.status(Response.Status.OK).build();
 	}
 }

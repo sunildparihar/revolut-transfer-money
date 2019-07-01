@@ -13,6 +13,7 @@
         <module name="ft-rest-services" />
         <module name="ft-sdk-bundle" />
         <module name="ft-service-gateway" />
+        <module name="ft-services-locator" />
         <module name="ft-transaction-management" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,7 @@
       <module name="ft-rest-services" target="1.8" />
       <module name="ft-sdk-bundle" target="1.8" />
       <module name="ft-service-gateway" target="1.8" />
+      <module name="ft-services-locator" target="1.8" />
       <module name="ft-transaction-management" target="1.8" />
       <module name="revolut-transfer-money" target="1.8" />
     </bytecodeTargetLevel>

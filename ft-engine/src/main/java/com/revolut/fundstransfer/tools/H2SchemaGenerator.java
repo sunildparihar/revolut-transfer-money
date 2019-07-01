@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Schema generator to create an in memory H2 DB
+ */
 public class H2SchemaGenerator {
 
     private static Logger log = Logger.getLogger(H2SchemaGenerator.class.getName());

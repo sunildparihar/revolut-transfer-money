@@ -32,8 +32,7 @@ public interface AccountService {
     AccountVO getAccount(Long accountId) throws InternalCoreException;
 
     /**
-     * Added for testing of @ com.revolut.core.fundstransfer.gateway.ServicesGateway} for overloaded methods, should be ignored.
-     * Find by account id
+     * Added for testing of {com.revolut.core.fundstransfer.gateway.ServicesGateway} for overloaded methods, should be ignored.
      *
      * @param accountId
      * @return

@@ -18,6 +18,7 @@
         <module>ft-core-services</module>
         <module>ft-transaction-management</module>
         <module>ft-connection-management</module>
+        <module>ft-services-locator</module>
     </modules>
 
 </project>

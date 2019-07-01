@@ -1,6 +1,6 @@
 package com.revolut.core.fundstransfer.gateway;
 
-import com.revolut.sdk.fundstransfer.ServiceFactory;
+import com.revolut.core.fundstransfer.service.locate.ServiceLocator;
 import com.revolut.sdk.fundstransfer.exception.ServiceException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,7 +27,7 @@ public class ServicesGateway {
      * @return The result of service method invocation
      * @throws ServiceException
      */
-    public Object passThrough(Class serviceClassType, String methodName, Object... arguments) throws ServiceException {
+    public Object pass(Class serviceClassType, String methodName, Object... arguments) throws ServiceException {
 
         Object result;
         boolean isOperationSuccessful = false;
@@ -58,8 +58,8 @@ public class ServicesGateway {
     private Object invokeService(Method method, Class serviceClassType, Object... arguments) throws ServiceException {
 
         try {
-            //locate the service using service factory and invoke the actual method implementation
-            Object implementationObj = ServiceFactory.getFactory(serviceClassType).getImplementation();
+            //locate the service using service locator and invoke the actual method implementation
+            Object implementationObj = ServiceLocator.getLocator(serviceClassType).locate();
             return method.invoke(implementationObj, arguments);
 
         } catch (InvocationTargetException e) {

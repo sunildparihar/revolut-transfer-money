@@ -28,9 +28,9 @@ public class FundsTransferServiceImpl implements FundsTransferService {
         AccountVO sourceAccount = null;
         AccountVO destinationAccount = null;
         try {
-            sourceAccount = (AccountVO) servicesGateway.passThrough(
+            sourceAccount = (AccountVO) servicesGateway.pass(
                     AccountService.class, "getAccount", transferRequest.getSourceAccountId());
-            destinationAccount = (AccountVO) servicesGateway.passThrough(
+            destinationAccount = (AccountVO) servicesGateway.pass(
                     AccountService.class, "getAccount", transferRequest.getDestinationAccountId());
         } catch (ServiceException e) {
             throw new InternalCoreException(e.getMessage(), e.getReasonCode());
@@ -43,10 +43,10 @@ public class FundsTransferServiceImpl implements FundsTransferService {
         int updateCount = 0;
         InternalCoreException exception = null;
         try {
-            servicesGateway.passThrough(
+            servicesGateway.pass(
                     AccountService.class, "withdrawFromAccount", sourceAccount.getAccountId(), transferRequest.getTransferAmount());
             updateCount++;
-            servicesGateway.passThrough(
+            servicesGateway.pass(
                     AccountService.class, "depositToAccount", destinationAccount.getAccountId(), transferRequest.getTransferAmount());
             updateCount++;
         } catch (ServiceException e) {
@@ -56,9 +56,9 @@ public class FundsTransferServiceImpl implements FundsTransferService {
         } finally {
             if (updateCount == 1) {
                 logger.log(Level.WARNING, "Transfer Failed, Source account was debited successfully, hence crediting back to source account");
-                //source account is debited but same is not credited to destination account, hence credit back the source account
+                //source account is debited but same is not credited to destination account, hence credit back the amount to source account
                 try {
-                    servicesGateway.passThrough(
+                    servicesGateway.pass(
                             AccountService.class, "depositToAccount", sourceAccount.getAccountId(), transferRequest.getTransferAmount());
                 } catch (ServiceException e) {
                     throw new InternalCoreException("Transfer Failed, Error while crediting back to source account:" + e.getMessage(), e.getReasonCode());

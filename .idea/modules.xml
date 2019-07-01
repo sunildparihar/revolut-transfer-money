@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/ft-rest-services/ft-rest-services.iml" filepath="$PROJECT_DIR$/ft-rest-services/ft-rest-services.iml" />
       <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-sdk-bundle/ft-sdk-bundle.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-sdk-bundle/ft-sdk-bundle.iml" />
       <module fileurl="file://$PROJECT_DIR$/ft-service-gateway/ft-service-gateway.iml" filepath="$PROJECT_DIR$/ft-service-gateway/ft-service-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-services-locator/ft-services-locator.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-services-locator/ft-services-locator.iml" />
       <module fileurl="file://$PROJECT_DIR$/ft-business-services/ft-transaction-management/ft-transaction-management.iml" filepath="$PROJECT_DIR$/ft-business-services/ft-transaction-management/ft-transaction-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/revolut-transfer-money.iml" filepath="$PROJECT_DIR$/revolut-transfer-money.iml" />
     </modules>

@@ -21,12 +21,12 @@ import java.util.concurrent.CountDownLatch;
 import static org.junit.Assert.assertTrue;
 
 /**
- * This is integration testing for AccountService Rest APIs
+ * This is integration testing for FundsTransferService Rest APIs
  * Please refer resources/prepareh2.sql for test data
  */
 public class FundsTransferServiceTest extends FTServiceTest {
 
-    private static final int THREAD_COUNT = 10;
+    private static final int THREAD_COUNT = 1000;
 
     private static final String SELECT_FOR_UPDATE = "SELECT * FROM BANK_ACCOUNT WHERE BANK_ACCOUNT_ID = ? FOR UPDATE";
 

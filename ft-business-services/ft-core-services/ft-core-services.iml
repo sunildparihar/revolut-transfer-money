@@ -19,6 +19,7 @@
     <orderEntry type="module" module-name="ft-transaction-management" />
     <orderEntry type="module" module-name="ft-connection-management" />
     <orderEntry type="module" module-name="ft-service-gateway" />
+    <orderEntry type="module" module-name="ft-services-locator" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.192" level="project" />
     <orderEntry type="library" name="Maven: commons-dbutils:commons-dbutils:1.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.4" level="project" />
