@@ -28,7 +28,7 @@ INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) V
 INSERT INTO BANK_ACCOUNT (BANK_ACCOUNT_ID,ACCOUNT_NUMBER,ACCOUNT_NAME,BALANCE) VALUES ('5','093801054','account-5',8000.00);
 ```
 
-## Architechture of Application
+## Architecture of Application
 This is a multi layered application with clear separation between individual layers. Following are the layers
 
 1. Database : In-Memory H2 DB
