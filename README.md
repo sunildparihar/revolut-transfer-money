@@ -41,7 +41,7 @@ Each and every layer can independently be modified and enhanced without affectin
 
 The application flow goes as below:
 
-Rest Client ==> Rest Service ==> Service Gateway ==> Cose Business Service ==> Data Access Layer ==> DB
+Rest Client ==> Rest Service ==> Service Gateway ==> Service Locator ==> Core Business Service ==> Data Access Layer ==> DB
 
 ### Concurrency Control (support for multiple systems and services invoking our application)
 Concurrency control has been handled at lowest level i.e. at DB layer using table row locks. I could have done at persistance layer or at business layer using java concurrent APIs but ideal place will be at DB layer only keeping in mind a real time scenario of application clustering. We can also make use of JPA to perform locking in a more standard way which avoids writing any DB vendor specifc sql queries.
