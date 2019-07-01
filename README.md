@@ -87,6 +87,11 @@ A separate module called ft-engine has been written to start a standalone restfu
 sh startFTengine.sh (Linux/MAC) or startFTengine.bat (Windows)
 ```
 
+If for any reason, you want to change the server port, please change below file:
+
+1. TransferEngine.java inside ft-engine module. Look for 7777 and change it.
+2. FTServiceTest.java inside ft-engine test module. Look for 7777 and change it.
+
 ## command to run tests
 All the integration test cases have been written inside ft-engine module. From project root directory, run below
 ```
