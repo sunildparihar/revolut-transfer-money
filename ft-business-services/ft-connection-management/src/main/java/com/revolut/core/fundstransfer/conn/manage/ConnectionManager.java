@@ -32,7 +32,6 @@ public class ConnectionManager {
     }
 
     private Connection createNewConnection() throws SQLException {
-//        return null;
         return ConnectionHelper.createNewConnection();
     }
 }

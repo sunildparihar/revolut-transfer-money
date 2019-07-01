@@ -2,6 +2,7 @@ package com.revolut.core.fundstransfer.transaction.manage;
 
 import com.revolut.core.fundstransfer.conn.manage.ConnectionManager;
 
+import javax.transaction.NotSupportedException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
@@ -30,12 +31,20 @@ public class RevolutTransactionManager {
      * If Transaction Propagation is REQUIRES_NEW or
      * If Transaction Propagation is REQUIRED and there is no parent transaction found.
      *
+     * As of now only REQUIRED & REQUIRES_NEW are supported.
+     *
+     * This transaction manager supports nested transactions as well.
+     *
      * @param transactionPropagation
      * @return
      * @throws SQLException
      */
 
     public Connection startTransaction(TxType transactionPropagation) throws Exception {
+
+        if (!isValidTransactionType(transactionPropagation)) {
+            throw new NotSupportedException("Trx Type Not Supported: "+transactionPropagation.name());
+        }
 
         Deque<Connection> connectionStack = currentThreadConnectionStack.get();
         if (Objects.isNull(connectionStack)) {
@@ -148,6 +157,11 @@ public class RevolutTransactionManager {
                 || connectionStack.isEmpty()
                 || Objects.isNull(endTransactionFlagStack)
                 || endTransactionFlagStack.isEmpty();
+    }
+
+    private boolean isValidTransactionType(TxType transactionPropagation) {
+        return transactionPropagation == TxType.REQUIRES_NEW
+                || transactionPropagation == TxType.REQUIRED;
     }
 
 }

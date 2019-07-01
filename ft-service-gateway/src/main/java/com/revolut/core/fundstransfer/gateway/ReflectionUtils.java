@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This Class usues reflection to find the actual service implementation method based on following
+ * This Class uses reflection to find the actual service implementation method based on following
  *
  *  1. The Class Type of the Service Interface
  *  2. The invoking Method name of the Service Interface
