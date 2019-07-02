@@ -6,7 +6,7 @@ A Java based Funds Transfer Engine with an in-memory DB and remote interface exp
 * <B>Web Server:</B> Jetty
 * <B>Frameworks Used:</B> No Framework is used, libraries for web server and Rest interface are used.
 * <B>Common libraries Used:</B> jersery libraries for supporting REST, jetty library, apache http client for testing REST APIs, H2 DB libraries, jackson for json binding, apache commons lang, apache commons collection.
-* <B>Common concerns addressed:</B> Transaction Management at business layer, Concurrency control at database layer.
+* <B>Common concerns addressed:</B> Transaction Management at business layer, Concurrency control.
 
 ## APIs
 * Get All Accounts
@@ -47,7 +47,7 @@ The application flow goes as below:
 Rest Client ==> Rest Service ==> Service Gateway ==> Service Locator ==> Core Business Service ==> Data Access Layer ==> DB
 
 ### Concurrency Control (support for multiple systems and services invoking our application)
-Concurrency control has been handled at lowest level i.e. at DB layer using table row locks. I could have done at persistance layer or at business layer using java concurrent APIs but ideal place will be at DB layer only keeping in mind a real time scenario of application clustering. We can also make use of JPA to perform locking in a more standard way which avoids writing any DB vendor specifc sql queries.
+Concurrency control has been handled at both the levels i.e. at database layer using DB table row level locks and at application layer. Ideally for this test application locking using DB table row is sufficient. However for demonstration purpose i have added locking at java layer too. In a real world scenario with application clustering we may not choose to put locking at application layer based on our priorities such as load on DB should be minimum or can afford DB load over heavy locking at java layer. But locking at DB level will be a must. We can also make use of JPA to perform DB locking in a more standard way which avoids writing any DB vendor specifc sql queries.
 
 ### Brief Description about each layer
 
