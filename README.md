@@ -6,7 +6,7 @@ A Java based Funds Transfer Engine with an in-memory DB and remote interface exp
 * <B>Web Server:</B> Jetty
 * <B>Frameworks Used:</B> No Framework is used, libraries for web server and Rest interface are used.
 * <B>Common libraries Used:</B> jersery libraries for supporting REST, jetty library, apache http client for testing REST APIs, H2 DB libraries, jackson for json binding, apache commons lang, apache commons collection.
-* <B>Common concerns addressed:</B> Transaction Management at business layer, Concurrency control at database layer.
+* <B>Common concerns addressed:</B> Transaction Management at business layer, Concurrency control.
 
 ## APIs
 * Get All Accounts
