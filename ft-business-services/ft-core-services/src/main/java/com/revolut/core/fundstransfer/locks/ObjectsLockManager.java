@@ -44,7 +44,7 @@ public class ObjectsLockManager {
     }
 
     /**
-     * This method locks multiple keys without as an atomic operation i.e. either all keys are locked or no key is locked.
+     * This method locks multiple keys as an atomic operation i.e. either all keys are locked or no key is locked.
      * This method waits until all are locked
      * @param keys
      */
