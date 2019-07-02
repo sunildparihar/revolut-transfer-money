@@ -66,7 +66,7 @@ Written in plain JDBC. Refer module ft-persistence-services. This layer can be c
 
 #### Service Gateway
 
-A Gateway to invoke core business services from any application interface e.g. Rest Interface, SOAP Interface or from any presentation layer application. The purpose of this service gateway to perform common checks and tasks before and after invoking core business services, similar to AOP. In this project i am only putting transaction management in this gateway but this gateway is open to be enhanced for logging, security checks etc.. This calls service locator to get the actual service implementation. Refer module ft-service-gateway
+A Gateway to invoke core business services from any application interface e.g. Rest Interface, SOAP Interface or from any presentation layer application. The purpose of this service gateway to perform common checks and tasks before and after invoking core business services, similar to AOP. However, in this project i am only putting transaction management in this gateway but this gateway is open to be enhanced for logging, security checks etc.. This calls service locator to get the actual service implementation. Refer module ft-service-gateway
 
 
 #### Rest Services
