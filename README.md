@@ -15,7 +15,10 @@ A Java based Funds Transfer Engine with an in-memory DB and remote interface exp
 * Deposit Money
 * Transfer Funds
 
+#### Assumption: Currency conversion is not implemented and is assumed transfers happen witin same currency.
 #### The In-Memory H2 DB is prepopulated with 5 accounts. For simplicity APIs for create and delete account feature have not been provided.
+
+
 
 ## Data Model
 
