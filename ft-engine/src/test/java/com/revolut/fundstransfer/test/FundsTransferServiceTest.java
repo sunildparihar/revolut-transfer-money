@@ -3,10 +3,12 @@ package com.revolut.fundstransfer.test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revolut.app.rest.fundstransfer.model.Account;
 import com.revolut.app.rest.fundstransfer.model.ErrorResponse;
+import com.revolut.app.rest.fundstransfer.model.TransactionRequest;
 import com.revolut.app.rest.fundstransfer.model.TransferRequest;
 import com.revolut.core.fundstransfer.persist.conn.ConnectionHelper;
 import com.revolut.core.fundstransfer.persist.to.BankAccountTO;
 import org.apache.commons.dbutils.DbUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -111,6 +113,90 @@ public class FundsTransferServiceTest extends FTServiceTest {
 
         assertTrue(sourceAccountAfterDeposit.getBalance().subtract(totalTransferAmount).longValue() == sourceAccountAfterTransfer.getBalance().longValue());
         assertTrue(destinationAccountBeforeUpdate.getBalance().add(totalTransferAmount).longValue() == destinationAccountAfterTransfer.getBalance().longValue());
+    }
+
+    /*
+      test funds transfer with 300 parallel threads to perform transfer, withdraw and deposit concurrently between two accounts.
+    */
+    @Test
+    public void testTransfer_Withdraw_Deposit_AllTogether_MultiThreaded() throws IOException, URISyntaxException, InterruptedException {
+
+        Account sourceAccountBeforeUpdate = getAccountById(3L);
+        Account destinationAccountBeforeUpdate = getAccountById(4L);
+
+        BigDecimal depositAmount = new BigDecimal(1000000000L);
+        Account sourceAccountAfterDeposit = depositMoney(sourceAccountBeforeUpdate.getAccountId(), depositAmount);
+        assertTrue(sourceAccountBeforeUpdate.getBalance().add(depositAmount).longValue() == sourceAccountAfterDeposit.getBalance().longValue());
+
+        Account destinationAccountAfterDeposit = depositMoney(destinationAccountBeforeUpdate.getAccountId(), depositAmount);
+        assertTrue(destinationAccountBeforeUpdate.getBalance().add(depositAmount).longValue() == destinationAccountAfterDeposit.getBalance().longValue());
+
+        BigDecimal perThreadTransferAmount = new BigDecimal(10L);
+        BigDecimal perThreadWithdrawalAmount = new BigDecimal(12L); //to be withdraw from destination account
+        BigDecimal perThreadDepositAmount = new BigDecimal(14L); //to be deposit into source account
+
+        int threadCount = 100;
+        CountDownLatch latch1 = new CountDownLatch(threadCount);
+        for (int i = 1; i <= threadCount; i++) {
+            new Thread( ()-> {
+                try {
+                    testPost("/transfer",
+                            new TransferRequest(perThreadTransferAmount,
+                                    sourceAccountBeforeUpdate.getAccountId(),
+                                    destinationAccountBeforeUpdate.getAccountId())
+                    );
+                } catch (Exception e) {
+                    System.out.println("#######Error occurred while transfer: "+e.getMessage());
+                } finally {
+                    latch1.countDown();
+                }
+            }).start();
+        }
+        latch1.await();
+
+        CountDownLatch latch2 = new CountDownLatch(threadCount);
+        for (int i = 1; i <= threadCount; i++) {
+            new Thread( ()-> {
+                try {
+                    testPost("/account/withdraw", new TransactionRequest(destinationAccountBeforeUpdate.getAccountId(), perThreadWithdrawalAmount));
+                } catch (Exception e) {
+                    System.out.println("#######Error occurred while transfer: "+e.getMessage());
+                } finally {
+                    latch2.countDown();
+                }
+            }).start();
+        }
+        latch2.await();
+
+        CountDownLatch latch3 = new CountDownLatch(threadCount);
+        for (int i = 1; i <= threadCount; i++) {
+            new Thread( ()-> {
+                try {
+                    testPost("/account/deposit", new TransactionRequest(sourceAccountBeforeUpdate.getAccountId(), perThreadDepositAmount));
+                } catch (Exception e) {
+                    System.out.println("#######Error occurred while transfer: "+e.getMessage());
+                } finally {
+                    latch3.countDown();
+                }
+            }).start();
+        }
+        latch3.await();
+
+        Account sourceAccountAfterTest = getAccountById(sourceAccountBeforeUpdate.getAccountId());
+        Account destinationAccountAfterTest = getAccountById(destinationAccountBeforeUpdate.getAccountId());
+
+        BigDecimal sourceAccountInitialBalance = sourceAccountAfterDeposit.getBalance();
+        BigDecimal destinationAccountInitialBalance = destinationAccountAfterDeposit.getBalance();
+
+        BigDecimal totalTransferAmount = perThreadTransferAmount.multiply(new BigDecimal(threadCount));
+        BigDecimal totalWithdrawAmount = perThreadWithdrawalAmount.multiply(new BigDecimal(threadCount));
+        BigDecimal totalDepositAmount = perThreadDepositAmount.multiply(new BigDecimal(threadCount));
+
+        BigDecimal expectedSourceAccBalance = sourceAccountInitialBalance.add(totalDepositAmount).subtract(totalTransferAmount);
+        BigDecimal expectedDestinationAccBalance = destinationAccountInitialBalance.add(totalTransferAmount).subtract(totalWithdrawAmount);
+
+        assertTrue(expectedSourceAccBalance.longValue() == sourceAccountAfterTest.getBalance().longValue());
+        assertTrue(expectedDestinationAccBalance.longValue() == destinationAccountAfterTest.getBalance().longValue());
     }
 
     /*

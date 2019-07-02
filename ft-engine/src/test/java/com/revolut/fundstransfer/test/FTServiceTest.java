@@ -7,12 +7,16 @@ import com.revolut.app.rest.fundstransfer.model.TransferRequest;
 import com.revolut.fundstransfer.TransferEngine;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
@@ -30,12 +34,29 @@ public abstract class FTServiceTest {
     private HttpClient client ;
     private Server server;
     private final URIBuilder uriBuilder = new URIBuilder().setScheme("http").setHost("localhost:7777");
+    private final int timeout = 120000;
 
     @Before
     public void startServer() throws Exception {
 //        System.out.println("############ TEST####### start server");
         server = new TransferEngine().startInMemoryWebServer();
         client= HttpClients.createDefault();
+/*        RequestConfig requestConfig = RequestConfig.custom()
+                .setSocketTimeout(timeout)
+                .setConnectionRequestTimeout(timeout)
+                .setConnectTimeout(timeout)
+                .build();
+
+        HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
+        connManager.setMaxTotal(1200);
+        connManager.setDefaultMaxPerRoute(1200);
+
+        httpClientBuilder.setConnectionManager(connManager);
+        httpClientBuilder.setConnectionManagerShared(true);
+//        httpClientBuilder.setDefaultRequestConfig(requestConfig);
+
+        client = httpClientBuilder.build();*/
     }
 
     @After

@@ -117,7 +117,7 @@ public class BankAccountAccessorH2Impl implements BankAccountAccessor {
         try {
             lockStatement = connection.prepareStatement(SELECT_FOR_UPDATE);
             lockStatement.setLong(1, accountId);
-            log.log(Level.INFO, "###trying to lock withdrawal account:" + accountId);
+//            log.log(Level.INFO, "###trying to lock withdrawal account:" + accountId);
             rs = lockStatement.executeQuery();
             if (rs.next()) {
                 account = createBankAccountFromResultSet(rs);

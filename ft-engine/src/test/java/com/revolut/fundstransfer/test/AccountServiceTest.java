@@ -5,6 +5,7 @@ import com.revolut.app.rest.fundstransfer.model.Account;
 import com.revolut.app.rest.fundstransfer.model.ErrorResponse;
 import com.revolut.app.rest.fundstransfer.model.TransactionRequest;
 import org.eclipse.jetty.util.StringUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
