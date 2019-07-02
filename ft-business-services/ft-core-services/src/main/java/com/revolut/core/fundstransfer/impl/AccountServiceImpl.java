@@ -1,5 +1,6 @@
 package com.revolut.core.fundstransfer.impl;
 
+import com.revolut.core.fundstransfer.locks.ObjectsLockManager;
 import com.revolut.core.fundstransfer.mapper.BankAccountMapper;
 import com.revolut.core.fundstransfer.persist.accessor.BankAccountAccessor;
 import com.revolut.core.fundstransfer.persist.accessor.DataAccessorFactory;
@@ -20,6 +21,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final DataAccessorFactory dataAccessorFactory = DataAccessorFactory.getDataAccessorFactory(DataAccessorFactory.DATA_ACCESSOR_FACTORY_H2);
     private final RevolutTransactionManager transactionManager = RevolutTransactionManager.getInstance();
+    private final ObjectsLockManager lockManager = ObjectsLockManager.getInstance();
 
     @Override
     public List<AccountVO> getAllAccounts() throws InternalCoreException {
@@ -61,11 +63,14 @@ public class AccountServiceImpl implements AccountService {
 
         int updateCount = 0;
         try {
+            lockManager.lockKey(account.getBankAccountId());
             updateCount = dataAccessorFactory.getBankAccountAccessor().withdraw(
                     transactionManager.getConnectionFromCurrentTransaction(), account.getBankAccountId(), amount
             );
         } catch (DataException e) {
             throw new InternalCoreException("Withdrawal Failed:" + e.getMessage());
+        } finally {
+            lockManager.unlockKey(account.getBankAccountId());
         }
         if (updateCount != 1) {
             // withdrawal failed
@@ -84,11 +89,14 @@ public class AccountServiceImpl implements AccountService {
 
         int updateCount = 0;
         try {
+            lockManager.lockKey(account.getBankAccountId());
             updateCount = dataAccessorFactory.getBankAccountAccessor().deposit(
                     transactionManager.getConnectionFromCurrentTransaction(), account.getBankAccountId(), amount
             );
         } catch (DataException e) {
             throw new InternalCoreException("Deposit Failed" + e.getMessage());
+        } finally {
+            lockManager.unlockKey(account.getBankAccountId());
         }
         if (updateCount != 1) {
             // deposit failed

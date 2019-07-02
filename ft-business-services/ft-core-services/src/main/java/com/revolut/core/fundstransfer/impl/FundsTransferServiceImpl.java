@@ -1,6 +1,7 @@
 package com.revolut.core.fundstransfer.impl;
 
 import com.revolut.core.fundstransfer.gateway.ServicesGateway;
+import com.revolut.core.fundstransfer.locks.ObjectsLockManager;
 import com.revolut.sdk.fundstransfer.services.AccountService;
 import com.revolut.sdk.fundstransfer.services.FundsTransferService;
 import com.revolut.sdk.fundstransfer.exception.InternalCoreException;
@@ -17,6 +18,7 @@ public class FundsTransferServiceImpl implements FundsTransferService {
 
     private static Logger logger = Logger.getLogger(FundsTransferServiceImpl.class.getName());
     private final ServicesGateway servicesGateway = ServicesGateway.getServicesGateway();
+    private final ObjectsLockManager lockManager = ObjectsLockManager.getInstance();
 
     @Override
     public void transferFunds(TransferRequestVO transferRequest) throws InternalCoreException, ValidationException {
@@ -43,6 +45,7 @@ public class FundsTransferServiceImpl implements FundsTransferService {
         int updateCount = 0;
         InternalCoreException exception = null;
         try {
+            lockManager.lockMultipleAtomically(sourceAccount.getAccountId(), destinationAccount.getAccountId());
             servicesGateway.pass(
                     AccountService.class, "withdrawFromAccount", sourceAccount.getAccountId(), transferRequest.getTransferAmount());
             updateCount++;
@@ -63,6 +66,12 @@ public class FundsTransferServiceImpl implements FundsTransferService {
                 } catch (ServiceException e) {
                     throw new InternalCoreException("Transfer Failed, Error while crediting back to source account:" + e.getMessage(), e.getReasonCode());
                 }
+            }
+            try {
+                lockManager.unlockMultiple(sourceAccount.getAccountId(), destinationAccount.getAccountId());
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Transfer Failed while unlocking accounts: "+e.getMessage());
+                exception = new InternalCoreException("Transfer Failed while unlocking accounts");
             }
             if (exception != null) {
                 throw exception;

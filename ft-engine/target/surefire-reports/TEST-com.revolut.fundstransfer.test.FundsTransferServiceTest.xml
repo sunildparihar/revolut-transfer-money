@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.revolut.fundstransfer.test.FundsTransferServiceTest" time="15.437" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.revolut.fundstransfer.test.FundsTransferServiceTest" time="15.018" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/jre/lib"/>
@@ -62,8 +62,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransferWithLockedDestinationAccountCreditFailed" time="11.396"/>
-  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransfer" time="0.137"/>
-  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testTransferMultiThreaded" time="3.831"/>
-  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransferInsufficientFunds" time="0.073"/>
+  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransferWithLockedDestinationAccountCreditFailed" time="11.4"/>
+  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransfer" time="0.133"/>
+  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testTransferMultiThreaded" time="3.389"/>
+  <testcase classname="com.revolut.fundstransfer.test.FundsTransferServiceTest" name="testFundsTransferInsufficientFunds" time="0.096"/>
 </testsuite>
