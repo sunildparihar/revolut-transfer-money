@@ -47,7 +47,7 @@ The application flow goes as below:
 Rest Client ==> Rest Service ==> Service Gateway ==> Service Locator ==> Core Business Service ==> Data Access Layer ==> DB
 
 ### Concurrency Control (support for multiple systems and services invoking our application)
-Concurrency control has been handled at both the levels i.e. at database layer using DB table row level locks and at application layer. Ideally for this test application locking using DB table row is sufficient. However for demonstration purpose i have added locking at java layer too. In a real world scenario with application clustering we may or may not choose to put locking at application layer based on our priorities such as load on DB should be minimum or can afford DB load over heavy locking at java layer. But locking at DB level will be a must. We can also make use of JPA to perform DB locking in a more standard way which avoids writing any DB vendor specifc sql queries.
+Concurrency control has been handled at both the levels i.e. at database layer using DB table row level locks and at application layer. Ideally for this test application locking using DB table row is sufficient. However for demonstration purpose i have added locking at java layer too. In a real world scenario with application clustering we may not choose to put locking at application layer based on our priorities such as load on DB should be minimum or can afford DB load over heavy locking at java layer. But locking at DB level will be a must. We can also make use of JPA to perform DB locking in a more standard way which avoids writing any DB vendor specifc sql queries.
 
 ### Brief Description about each layer
 
